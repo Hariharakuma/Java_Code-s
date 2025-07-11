@@ -1,0 +1,106 @@
+package TrainApi;
+import java.util.*;
+class Train {
+	int number;
+    String name;
+    int seats;
+    int seatavilable;
+    Train(String name,int number,int seats,int seatavilable){
+        this.name=name;
+        this.number=number;
+        this.seats=seats;
+        this.seatavilable=seatavilable;
+    }
+
+    public Train(String nam, int num, int sea) {
+		// TODO Auto-generated constructor stub
+	}
+
+	boolean Seat(int count){
+        if(count<=seats){
+            seats-=count;
+            return true;
+    }
+        else{
+            return false;
+        }
+    }
+      void Displaytrain(){  
+        System.out.print("Train Name:"+name+"Train Number:"+number+"Train Seats:"+seats+"Seats available:"+seatavilable);
+    }
+}
+  public class  TrainApi{
+	  
+   public static void main(String[] args) {
+       Scanner ai=new Scanner(System.in);
+       System.out.print("\nHow Many Train Do You Want to add :");
+       int n=ai.nextInt();
+       Train[] trains = new Train[n];
+       for(int i=0;i<n;i++){
+           System.out.print("\nEnter Train Details"+(i + 1)+":");
+           System.out.print("Enter Name:");
+           String nam=ai.nextLine();
+           ai.nextLine();
+           System.out.print("Enter the Number:");
+           int num=ai.nextInt();
+           ai.nextLine();
+           System.out.print("Enter the Seats:");
+           int sea=ai.nextInt();
+           ai.nextLine();
+           trains[i]=new Train(nam, num, sea);
+       }
+       int choice;
+       do{
+           System.out.print("::Booking Menu Open::");
+           System.out.print("View All Train");
+           System.out.print("Book The TIcket");
+           System.out.print("Exit");
+           System.out.print("Enetr Your Choice");
+           choice=ai.nextInt();
+           switch(choice){
+               case 1:
+                   System.out.print("\nAvilable Seats");
+                   for(Train train : trains){
+                       train.Displaytrain();
+                   }
+                   break;
+               case 2:
+                  System.out.println("Enter train number to Book:");
+                  int a=ai.nextInt();
+                  boolean found=false;
+                  for(Train train : trains){
+                      if(train.number==a){
+                          found=true;
+                          System.out.print("Enter Train to Book:");
+                          int seats=ai.nextInt();
+                          if(train.Seat(seats)){
+                              System.out.print("Booking Sucssefully"+seats+"Seats of"+train.name);
+                          }
+                          else{
+                              System.out.print("Booking was Failled");
+                          }
+                          break;
+                      }
+                  }
+                  if(!found){
+                      System.out.print("Train Not Found");
+                  }
+                  break;
+               case 3:
+                   System.out.print("Thank for using Booking System");
+                   break;
+                   
+                   default:
+                   System.out.print("Invalid choices");
+           
+       }
+                  
+       
+   }
+                  while(choice!=3);
+                  ai.close();
+}
+   
+
+
+}
